@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <div id="user_add">
+        <h1>Add a User</h1>
+        <form action="process" method="post">
+            {% csrf_token %}
+            <p>First Name: <input name="fname" type="text"></p>
+            <p>Last Name: <input name="lname" type="text"></p>
+            <p>Age: <input name="age" type="number"></p>
+            <p>Email: <input name="email" type="text"></p>
+			<p>Password: <input name="pass" type="password"></p>
+			<p>Confirm Password: <input name="pass_confirm" type="password"></p>
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+</body>
+</html>
