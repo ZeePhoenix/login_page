@@ -13,7 +13,7 @@ class UserManager(models.Manager):
 			errors['lname'] = ("Invalid Last Name")
 		if not EMAIL_REGEX.match(postData["email"]):
 			errors['email'] = ("Invalid Email Address")
-		if len(User.objects.filter(email_address=postData['email'])) == 0:
+		if len(User.objects.filter(email_address=postData['email'])) > 0:
 			errors['email'] = ("Email alread in use")
 		if len(postData['pass']) < 8:
 			errors['pass'] = ("Password not long enough")

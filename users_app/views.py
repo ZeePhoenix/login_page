@@ -16,7 +16,7 @@ def register(request):
 			messages.error(request, val)
 		return redirect("/")
 	else:
-		password = request.POST['password']
+		password = request.POST['pass']
 		pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 		print(pw_hash)
 		user = User.objects.create(
@@ -28,16 +28,22 @@ def register(request):
 		return redirect("/success")
 
 def login(request):
-	user = User.objects.filter(username=request.POST['email'])
+	user = User.objects.filter(email_address=request.POST['email'])
 	if user:
 		logged_user = user[0]
-		if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
+		if bcrypt.checkpw(request.POST['pass'].encode(), logged_user.password.encode()):
 			request.session['userid'] = logged_user.id
+			print("Logged into the Mainframe")
 			return redirect("/success")
 	return redirect('/')
 
 def success(request):
-	context = { 'user' : request.session['userid'] }
+	try:
+		user = User.objects.filter(id=request.session['userid'])
+	except:
+		return redirect("/")
+		
+	context = { 'user' : user[0] }
 	return render(request, "success.html", context)
 
 def logout(request):

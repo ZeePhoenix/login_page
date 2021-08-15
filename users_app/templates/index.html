@@ -26,9 +26,9 @@
 		</ul>
 		{% endif %}
     </div>
-	<div id="login">
+	<div id="login_div">
 		<h1>Login</h1>
-		<form>
+		<form action="login" method="post">
 			{% csrf_token %}
 			<p>Email: <input name="email" type="email"></p>
 			<p>Password: <input name="pass" type="password"></p>
