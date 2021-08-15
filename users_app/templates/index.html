@@ -8,17 +8,32 @@
 </head>
 <body>
     <div id="user_add">
-        <h1>Add a User</h1>
-        <form action="process" method="post">
+        <h1>User Registration</h1>
+        <form action="register" method="post">
             {% csrf_token %}
             <p>First Name: <input name="fname" type="text"></p>
             <p>Last Name: <input name="lname" type="text"></p>
-            <p>Age: <input name="age" type="number"></p>
-            <p>Email: <input name="email" type="text"></p>
+            <p>Email: <input name="email" type="email"></p>
 			<p>Password: <input name="pass" type="password"></p>
 			<p>Confirm Password: <input name="pass_confirm" type="password"></p>
-            <button type="submit">Add User</button>
+            <button type="submit">Register</button>
         </form>
+		{% if messages %}
+		<ul class="messages">    
+			{% for message in messages %}    
+				<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+			{% endfor %}
+		</ul>
+		{% endif %}
     </div>
+	<div id="login">
+		<h1>Login</h1>
+		<form>
+			{% csrf_token %}
+			<p>Email: <input name="email" type="email"></p>
+			<p>Password: <input name="pass" type="password"></p>
+			<button type="submit">Log In</button>
+		</form>
+	</div>
 </body>
 </html>
